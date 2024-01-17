@@ -99,7 +99,7 @@ const Container = styled.div`
             width: 90%;
             cursor: pointer;
             border-radius: 0.2rem;
-            padding: 0.4rem;
+            padding: 0.8rem;
             display: flex;
             gap: 1rem;
             align-items: center;

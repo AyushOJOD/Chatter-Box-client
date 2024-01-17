@@ -46,7 +46,7 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
                         }
                     </div>
                     <div className="currentUser">
-                        <div className="avatar">
+                        <div className="avatar" onClick={() => { setCurrentSelected(undefined); changeChat(undefined) }}>
                             <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar" />
                         </div>
                         <div className="username">
@@ -131,6 +131,7 @@ const Container = styled.div`
             img{
                 height: 4rem;
                 max-inline-size: 100%;
+                cursor: pointer;
             }
         }
         .username{

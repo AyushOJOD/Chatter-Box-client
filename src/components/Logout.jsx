@@ -12,7 +12,7 @@ const Logout = () => {
     }
 
     return (
-        <Button onClick={handleLogout}>
+        <Button onClick={handleLogout} title='Log out'>
             <BiPowerOff />
         </Button>
     )

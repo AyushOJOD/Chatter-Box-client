@@ -4,7 +4,7 @@ import Picker from "emoji-picker-react"
 import { IoMdSend } from 'react-icons/io'
 import { BsEmojiSmileFill } from 'react-icons/bs'
 
-const ChatInput = () => {
+const ChatInput = ({ handleSendMsg }) => {
 
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [message, setMessage] = useState('');
@@ -17,17 +17,26 @@ const ChatInput = () => {
         let msg = message;
         msg += emojiObject.emoji;
         setMessage(msg);
+    }  // This is not working as ecpected
+
+    const sendChat = (e) => {
+        e.preventDefault();
+        if (message.length > 0) {
+            handleSendMsg(message)
+            setMessage('');
+        }
     }
+
 
     return (
         <Container>
             <div className="button-container">
                 <div className="emoji">
                     <BsEmojiSmileFill onClick={handleEmojiPicker} />
-                    {showEmojiPicker && <Picker className='emoji-picker-react' onClick={handleEmojiClick} />}
+                    {showEmojiPicker && <Picker className='emoji-picker-react' onEmojiClick={handleEmojiClick} />}
                 </div>
             </div>
-            <form className="input-container">
+            <form className="input-container" onSubmit={(e) => sendChat(e)}>
                 <input type="text" placeholder='Type a message' value={message} onChange={(e) => setMessage(e.target.value)} />
                 <button className="submit">
                     <IoMdSend />
@@ -59,7 +68,30 @@ const Container = styled.div`
             }
             .emoji-picker-react{
                 position: absolute;
-                top: -470px
+                top: -470px;
+                background-color: #080420;
+                box-shadow: 0 5px 10px #9a86f3; 
+                border-color: #9a86f3;
+                .emoji-scroll-wrapper::-webkit-scrollbar{
+                    background-color: #080420;
+                    width: 5px;
+                    &-thumb{
+                        background-color: #9a86f3;
+                        border-radius: 2rem;
+                    }
+                }
+                .emoji-categories{
+                    button{
+                        filter: contrast(0);
+                    }
+                }
+                .emoji-search{
+                    background-color: transparent;
+                    border-color: #9186f3;
+                }
+                .emoji-group:before{
+                    background-color: #080420;
+                }
             }
         }
     }
@@ -94,6 +126,7 @@ const Container = styled.div`
                 background-color: #9a86f3;
                 border: none;
                 border: none;
+                cursor: pointer;
                 svg{
                     font-size: 2rem;
                     color: white;

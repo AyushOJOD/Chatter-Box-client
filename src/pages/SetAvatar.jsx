@@ -43,7 +43,7 @@ const SetAvatar = () => {
         if (selectedAvatar === undefined) {
             toast.error("Please select an avatar", toastOptions);
         } else {
-            const user = await JSON.parse(
+            const user = JSON.parse(
                 localStorage.getItem('chatter-token')
             );
 
@@ -51,13 +51,11 @@ const SetAvatar = () => {
                 image: avatars[selectedAvatar],
             });
 
-            console.log(data);
-
             if (data.isSet) {
-                user.isAvatarImageSet = true;
-                user.avatarImage = data.image;
+                user.isAvatarSet = true;
+                user.avatar = data.image;
                 localStorage.setItem(
-                    process.env.REACT_APP_LOCALHOST_KEY,
+                    "chatter-token",
                     JSON.stringify(user)
                 );
                 navigate("/");
